@@ -1,12 +1,13 @@
 <?php
 
+/** Класс === Чертеж. Тут мы проектируем кота */
 class Cat
 {
-    // Ошейник для кота можно просто строкой реализовать, а можно отдельным объектом класса Collar
+    /** Ошейник для кота можно просто строкой реализовать, а можно отдельным объектом класса Collar */
     // public string $collar = 'green with brilliants';
     // public ?Collar $collar = null;
 
-    private $name = 'Vasya';
+    private $name = 'Vasya'; // Приветное свойство, доступнотолько внутри класса
 
     public function getName(): string
     {
@@ -22,29 +23,37 @@ class Cat
         echo 'Мяу Мяу';
     }
 
-    public function eat()
+    public function eat() // Публичный метод. Доступен везде и всем
     {
         echo 'Я кот и я ем!' . '<br>';
-        $this->purr();
+        $this->purr(); // Приватный метод, вызывается внутри класса.
     }
 
-    private function purr()
+    private function purr() // Приватный метод. Доступен долько внутни класса
     {
         echo 'Мур Мур';
     }
 }
 
-$cat = new Cat();
+$cat = new Cat(); // Тут создали нашего кота по проекту чертежа Cat
 //echo $cat->getName();
 
+/** Класс === Чертеж. Тут мы проектируем машину */
 class Car
 {
     public string $mark = 'Lada';
     public string $model = '2110';
     //public $speed = 500;
 
+    /** @var Engine|null - Двигатель машины может быть по чертежу Engine или null */
     private ?Engine $engine = null;
 
+    /**
+     * Метод установки двигателя в машину
+     *
+     * @param Engine $engine
+     * @return void
+     */
     public function setEngine(Engine $engine)
     {
         $this->engine = $engine;
@@ -118,14 +127,3 @@ $sword = new Sword(); // Меч
 $romka = new Warrior(); // Воин
 $romka->sword = $sword; // Воин берет меч
 $romka->hit(); // Воин бьет (воин ударит мечем или кулаком в зависимости от того есть ли у него меч. Так мы написалы в методе hit())
-
-
-
-
-
-
-
-
-
-
-
