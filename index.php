@@ -230,4 +230,238 @@ class Computer
 
 $computer = new Computer('intel', 15, 70000);
 $computer = new Computer('amd', 17, 120000);
-debug($computer);
+//debug($computer);
+
+
+
+/** ***** Lesson 3 OOP - Inheritance ***** */
+abstract class Animal
+{
+    public int $health = 100;
+
+    public int $age = 10;
+
+    public bool $isAlive = true;
+
+    public function bite(): void
+    {
+        echo "bite!";
+    }
+
+    public function jump(): void
+    {
+        echo "jump!";
+    }
+}
+
+class Lion extends Animal
+{
+    public int $health = 1000;
+
+    public int $mane = 1;
+
+    public function roar(): void
+    {
+        echo "roar!";
+    }
+}
+
+class SpaceLion extends Lion
+{
+    public function flyToStar()
+    {
+        echo "flyToStar!";
+    }
+}
+
+//$animal = new Animal();
+//$animal->bite();
+//$animal->jump();
+//echo $animal->health;
+//debug($animal);
+
+//echo "<br>";
+
+//$lion = new Lion();
+//$lion->bite();
+//$lion->roar();
+//$lion->jump();
+//echo $lion->health;
+//debug($lion);
+
+
+
+
+
+class Weapon
+{
+    public string $mark = 'pm'; // Пистолет Макарова
+
+    public int $damage = 1;
+
+    public string $typeDamage = 'bullet';
+
+    public function attack(): void
+    {
+        echo $this->mark . ' наносит ' . $this->damage . ' ' . $this->typeDamage . ' урона';
+    }
+}
+
+class GaysWeapon extends Weapon
+{
+    public string $mark = 'GaysPm';
+
+    public int $damage = 10;
+
+    public string $typeDamage = 'enegry';
+}
+
+class Stalker
+{
+    private Weapon $weapon;
+
+    public function setWeapon(Weapon $weapon): void
+    {
+        $this->weapon = $weapon;
+    }
+
+    public function attack()
+    {
+        $this->weapon->attack();
+    }
+}
+
+$pm = new Weapon();
+//$gpm = new GaysWeapon();
+
+$stalker = new Stalker();
+$stalker->setWeapon($pm);
+$stalker->attack();
+
+
+
+/********** Пример из реальной жизни  web программиста ***************/
+class CatCreateForm
+{
+    const GENDER_BOY = 'Boy';
+    const GENDER_GIRL = 'Girl';
+
+    public string $name = '';
+
+    public int $age = 0;
+
+    public string $gender = '';
+
+    public function loadPost($_POST)
+    {
+        if (!in_array($_POST['gender'], [self::GENDER_BOY, self::GENDER_GIRL])) {
+            return false;
+        }
+    }
+}
+
+class LoginForm
+{
+    public string $username = '';
+
+    public string $password = '';
+
+    public string $email = '';
+
+    public bool $emailNotification = true;
+
+    public function login(): bool
+    {
+        // ...
+        return true;
+    }
+}
+
+class ExtendedLoginForm extends LoginForm
+{
+    public int $age = 0;
+
+    public function login(): bool
+    {
+        if ($this->age < 18) {
+            return false;
+        } else {
+            // ...
+            return true;
+        }
+    }
+}
+
+
+/* **** Дальше не успели **** */
+
+
+
+class BaseCat
+{
+    public string $name = '';     // Публичные свойства и методы видны и доступны везде
+
+    private int $age;             // Приватные свойства и методы видны и доступны только внутри своего класса в котором они объявлены
+
+//    public function setAge(int $age): void
+//    {
+//        $this->age = $age;
+//    }
+//
+//    public function getAge(): int
+//    {
+//        return $this->age;
+//    }
+
+    protected string $color = ''; // Протектед свойства и методы видны и доступны только внутри класса и внутри наследников класса
+
+    public function __construct(string $catName, int $age, string $color)
+    {
+        $this->name = $catName;
+        $this->age = $age;
+        $this->color = $color;
+    }
+
+    public function may()
+    {
+        // может быть очень много строк кода
+        echo "Мяу мяу! Я " . $this->name . ' Мне ' . $this->age . ' лет';
+    }
+}
+
+class AdvancedCat extends BaseCat
+{
+    public string $colorEyes = '';
+
+    public function __construct(string $catName, int $age, string $color, string $eyesColor)
+    {
+        parent::__construct($catName, $age, $color);
+        $this->colorEyes = $eyesColor;
+    }
+
+    public function may()
+    {
+        parent::may();
+        echo " У меня глаза цвета:" . $this->colorEyes;
+    }
+}
+
+$baseCat = new BaseCat('Tom', 5, 'blue');
+$advancedCat = new AdvancedCat('Forrest', 5, 'orange', 'yellow');
+
+//echo $baseCat->name; // public свойство YES
+//echo $advancedCat->name; // public свойство YES
+//
+//echo $baseCat->age; // private свойство NO
+//echo $advancedCat->age; // private свойство NO
+//
+//echo $baseCat->color; // protected свойство NO
+//echo $advancedCat->color; // protected свойство NO
+
+
+
+
+
+
+
+
