@@ -331,12 +331,12 @@ class Stalker
     }
 }
 
-$pm = new Weapon();
+//$pm = new Weapon();
 //$gpm = new GaysWeapon();
 
-$stalker = new Stalker();
-$stalker->setWeapon($pm);
-$stalker->attack();
+//$stalker = new Stalker();
+//$stalker->setWeapon($pm);
+//$stalker->attack();
 
 
 
@@ -352,12 +352,12 @@ class CatCreateForm
 
     public string $gender = '';
 
-    public function loadPost($_POST)
-    {
-        if (!in_array($_POST['gender'], [self::GENDER_BOY, self::GENDER_GIRL])) {
-            return false;
-        }
-    }
+//    public function loadPost($_POST)
+//    {
+//        if (!in_array($_POST['gender'], [self::GENDER_BOY, self::GENDER_GIRL])) {
+//            return false;
+//        }
+//    }
 }
 
 class LoginForm
@@ -424,14 +424,21 @@ class BaseCat
 
     public function may()
     {
-        // может быть очень много строк кода
-        echo "Мяу мяу! Я " . $this->name . ' Мне ' . $this->age . ' лет';
+        echo "Мяу мяу! Я " . $this->name . ' Мне ' . $this->age . ' лет' . '. Мой цвет ' . $this->color;
     }
 }
+
+//$c = new BaseCat('A', 12, 'green');
 
 class AdvancedCat extends BaseCat
 {
     public string $colorEyes = '';
+
+//    public function __construct(string $catName, int $age, string $color, string $eyesColor)
+//    {
+//        parent::__construct($catName, $age, $color);
+//        $this->colorEyes = $eyesColor;
+//    }
 
     public function __construct(string $catName, int $age, string $color, string $eyesColor)
     {
@@ -441,6 +448,7 @@ class AdvancedCat extends BaseCat
 
     public function may()
     {
+        $this->color = 'red';  // !!!!! Решено! Дописал 427 строку
         parent::may();
         echo " У меня глаза цвета:" . $this->colorEyes;
     }
@@ -448,6 +456,9 @@ class AdvancedCat extends BaseCat
 
 $baseCat = new BaseCat('Tom', 5, 'blue');
 $advancedCat = new AdvancedCat('Forrest', 5, 'orange', 'yellow');
+$baseCat->may();
+echo "<hr>";
+$advancedCat->may();
 
 //echo $baseCat->name; // public свойство YES
 //echo $advancedCat->name; // public свойство YES
@@ -457,6 +468,34 @@ $advancedCat = new AdvancedCat('Forrest', 5, 'orange', 'yellow');
 //
 //echo $baseCat->color; // protected свойство NO
 //echo $advancedCat->color; // protected свойство NO
+
+
+
+// Пример с protected свойством
+class A
+{
+    protected string $name = 'A';
+
+    public function say()
+    {
+        echo $this->name;
+    }
+}
+
+class B extends A
+{
+    public function say()
+    {
+        $this->name = 'X';
+        parent::say();
+    }
+}
+
+//$a = new A();
+//$a->say(); // выведет A
+
+//$b = new B();
+//$b->say(); // Выведет X
 
 
 
