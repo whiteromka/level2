@@ -456,9 +456,9 @@ class AdvancedCat extends BaseCat
 
 $baseCat = new BaseCat('Tom', 5, 'blue');
 $advancedCat = new AdvancedCat('Forrest', 5, 'orange', 'yellow');
-$baseCat->may();
-echo "<hr>";
-$advancedCat->may();
+//$baseCat->may();
+//echo "<hr>";
+//$advancedCat->may();
 
 //echo $baseCat->name; // public свойство YES
 //echo $advancedCat->name; // public свойство YES
@@ -475,10 +475,14 @@ $advancedCat->may();
 class A
 {
     protected string $name = 'A';
+    private string $lastName = 'A';
 
     public function say()
     {
         echo $this->name;
+        echo $this->lastName;
+        echo "<br>";
+        echo "<hr>";
     }
 }
 
@@ -487,15 +491,17 @@ class B extends A
     public function say()
     {
         $this->name = 'X';
+        $this->lastName = 'X2'; // Это недоступно !
         parent::say();
     }
 }
 
-//$a = new A();
-//$a->say(); // выведет A
 
-//$b = new B();
-//$b->say(); // Выведет X
+$a = new A();
+$a->say(); // выведет A
+
+$b = new B();
+$b->say(); // Выведет X
 
 
 

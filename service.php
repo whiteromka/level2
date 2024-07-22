@@ -123,7 +123,7 @@ class UserCreator
     }
 }
 
-$userCreator = new UserCreator(20);
+$userCreator = new UserCreator(100);
 $userCreator->create();
 $users = $userCreator->getUsers();
 //debug($users);
@@ -133,7 +133,12 @@ class HireEmployer
 {
     private array $users;
 
-    private array $emails;
+    private array $emails = [];
+
+    public function getEmails()
+    {
+        return $this->emails;
+    }
 
     public function __construct(array $users)
     {
@@ -149,7 +154,7 @@ class HireEmployer
                 $user->getWantedSalary() <= 100 &&
                 $user->getEducation() === 'University'
             ) {
-                // array_push($this->emails, $user->getEmail()); // !!!
+                 //array_push($this->emails, $user->getEmail()); // !!!
                 $this->emails[] = $user->getEmail();
             }
         }
@@ -160,7 +165,9 @@ class HireEmployer
 
 
 $hire = new HireEmployer($users);
+$hire->sortUsers();
 $emails = $hire->getEmails(); // !!!! дописать и проверить
+//debug($emails);
 
 
 
