@@ -158,8 +158,23 @@ class Pistol implements IGun
 
 class Automat implements IGun
 {
+    use Reloader;
+
     public function shoot()
     {
         // Код, который заставит автомат стрелять
     }
 }
+
+trait Reloader
+{
+    public function reload()
+    {
+        echo 'reload';
+    }
+}
+
+$a = new Automat();
+$a->reload();
+
+
